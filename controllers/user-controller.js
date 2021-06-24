@@ -66,7 +66,7 @@ const userController = {
         });
     },
 
-    //delete an exixting user by id
+    //delete an existing user by id
     deleteUser ({params}, res) {
         User.findByIdAndDelete(params.id)
         .then (dbUserData => {
@@ -86,3 +86,5 @@ const userController = {
 
 
 }
+
+module.exports = userController;
