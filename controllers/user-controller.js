@@ -48,5 +48,23 @@ const userController = {
         });
     },
 
+    //update an existing user by id
+    updateUser ({ body, params }, res) {
+        User.findByIdAndUpdate(params.id, body, {new : true})
+        .then (dbUserData => {
+            if (!dbUserData)
+            {
+                res.status(404).json({message : 'User id does not exists!'});
+                return;
+            }
+
+            res.json(dbUserData);
+        })
+        .catch (err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    }
+
 
 }
