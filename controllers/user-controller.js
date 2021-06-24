@@ -14,6 +14,15 @@ const userController = {
     //get one user by id
     getUserById (req, res) {
         User.findBy({_id})
+        .populate ({
+            path : 'thoughts',
+            select : '-__v'
+        })
+        .populate ({
+            path : 'friends',
+            select : '-__v'
+        })
+        .select ('-__v')
         .then (dbUserData => {
             if (!dbUserData)
             {
@@ -27,5 +36,7 @@ const userController = {
             console.log(err);
             res.status(500).json(err);
         });
-    }
+    },
+
+    //
 }
