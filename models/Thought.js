@@ -1,5 +1,6 @@
 const {Schema, model} = require ('mongoose');
 var format = require('date-fns/format');
+const ReactionSchema = require ('./Reaction');
 
 
 //create schema
@@ -26,7 +27,7 @@ const ThoughtSchema = new Schema ({
 
     reactions : [{
         type : Schema.Types.ObjectId,
-        ref : 'Reaction'
+        ref : 'ReactionSchema'
     }]
 },
 {
