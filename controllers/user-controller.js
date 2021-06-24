@@ -64,6 +64,24 @@ const userController = {
             console.log(err);
             res.status(500).json(err);
         });
+    },
+
+    //delete an exixting user by id
+    deleteUser ({params}, res) {
+        User.findByIdAndDelete(params.id)
+        .then (dbUserData => {
+            if (!dbUserData)
+            {
+                res.status(404).json({message : 'User Id does not exixts'});
+                return;
+            }
+
+            res.json(dbUserData);
+        })
+        .catch (err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
     }
 
 
