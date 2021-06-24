@@ -12,8 +12,8 @@ const userController = {
     },
 
     //get one user by id
-    getUserById (req, res) {
-        User.findBy({_id})
+    getUserById ({params}, res) {
+        User.findById(params.id)
         .populate ({
             path : 'thoughts',
             select : '-__v'
@@ -38,5 +38,15 @@ const userController = {
         });
     },
 
-    //
+    //create a new user
+    createUser ({body}, res) {
+        User.create({body})
+        .then (dbUserData => res.json(dbUserData))
+        .catch (err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    },
+
+
 }
