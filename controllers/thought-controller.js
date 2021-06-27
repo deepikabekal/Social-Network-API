@@ -52,5 +52,46 @@ const thoughtController = {
             console.log(err);
             res.status(500).json(err);
         });
+    },
+
+    //update thought by id
+    updateThought({params, body}, res) {
+        Thought.findByIdAndUpdate(
+            params.id, 
+            body, 
+            {new : true}
+        )
+        .then (dbThoughtData => {
+            if (!dbThoughtData)
+            {
+                res.status(404).json({message : 'Thought Id does not exists!'});
+                return;
+            }
+
+            res.json(dbThoughtData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    }, 
+
+    //remove thought by id
+    removeThought ({params}, res) {
+        Thought.findByIdAndDelete(params.id)
+        .then (dbThoughtData => {
+            if (!dbThoughtData)
+            {
+                res.status(404).json({message : 'Thought Id does not exists!'});
+                return;
+            }
+
+            res.json(dbThoughtData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+        
     }
 }
