@@ -82,7 +82,9 @@ const userController = {
             console.log(err);
             res.status(500).json(err);
         });
-    }
+    },
+
+    //remove a user's associated thoughts when deleted
 
 
 }
