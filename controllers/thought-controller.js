@@ -93,5 +93,51 @@ const thoughtController = {
             res.status(500).json(err);
         });
         
+    },
+
+    //create a reaction stored in a single thought's reactions array field
+    createReaction ({params, body}, res) {
+        Thought.findByIdAndUpdate (
+            {_id : params.thoughtId},
+            {$push : {reactions : body}},
+            {new : true}
+        )
+        .then (dbThoughtData => {
+            if (!dbThoughtData)
+            {
+                res.status(404).json({message : 'Thought Id does not exists!'});
+                return;
+            }
+
+            res.json(dbThoughtData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
+    },
+
+    //remove a reaction
+    removeReaction ({params}, res) {
+        Thought.findByIdAndUpdate(
+            {_id : params.thoughtId},
+            {$pull : {reactions : params.reactionId}},
+            {new : true}
+        )
+        .then (dbThoughtData => {
+            if (!dbThoughtData)
+            {
+                res.status(404).json({message : 'Thought Id does not exists!'});
+                return;
+            }
+
+            res.json(dbThoughtData);
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json(err);
+        });
     }
 }
+
+module.exports = thoughtController;
