@@ -13,7 +13,7 @@ const UserSchema = new Schema ({
         type : String,
         required : 'Email is required',
         unique : true,
-        match : '^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$'
+        // match : '^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$'
     },
 
     thoughts : [{
@@ -43,7 +43,7 @@ UserSchema.virtual('friendCount').get(function () {
 })
 
 //create User model using UserSchema
-const User = mongoose.model('User', UserSchema);
+const User = model('User', UserSchema);
 
 //export the User model
 module.exports = User;
