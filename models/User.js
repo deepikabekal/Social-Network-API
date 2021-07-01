@@ -1,28 +1,28 @@
-const { Schema, model } = require ('mongoose');
+const { Schema, model, Types } = require ('mongoose');
 
 //create user schema
 const UserSchema = new Schema ({
     username : {
         type : String,
-        unique : true,
         required : 'Username is required',
-        trim : true
+        unique : true,
+        trim : true,
     },
 
     email : {
         type : String,
         required : 'Email is required',
         unique : true,
-        // match : '^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$'
+        match : [/.+@.+\..+/]  
     },
 
     thoughts : [{
-        type : Schema.Types.ObjectId,
+        type : Types.ObjectId,
         ref : 'Thought'
     }],
 
     friends : [{
-        type : Schema.Types.ObjectId,
+        type : Types.ObjectId,
         ref : 'User'
     }]
 

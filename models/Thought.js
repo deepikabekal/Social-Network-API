@@ -1,12 +1,12 @@
-const {Schema, model} = require ('mongoose');
+const {Schema, model, Types} = require ('mongoose');
 var format = require('date-fns/format');
 
 //create reaction schema
 const ReactionSchema = new Schema (
     {
         reactionId : {
-            type : Schema.Types.ObjectId,
-            default : new Schema.Types.ObjectId
+            type : Types.ObjectId,
+            default : new Types.ObjectId
         },
 
         reactionBody : {
@@ -24,7 +24,7 @@ const ReactionSchema = new Schema (
             type : Date,
             default : Date.now,
             get : (createdAtVal) => {
-                return format (new Date(createdAtVal), 'MMMM do, YYYY at hh:mm aaa');
+                return format (new Date(createdAtVal), "MMMM do, yyyy 'at' hh:mm aaa");
             }
         }
     },
@@ -50,7 +50,7 @@ const ThoughtSchema = new Schema ({
         type : Date,
         default : Date.now,
         get : (createdAtVal) => {
-            return format (new Date(createdAtVal), 'MMMM do, YYYY at hh:mm aaa');
+            return format (new Date(createdAtVal), "MMMM do, yyyy 'at' hh:mm aaa");
         }
     },
 

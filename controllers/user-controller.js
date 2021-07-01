@@ -40,7 +40,7 @@ const userController = {
 
     //create a new user
     createUser ({body}, res) {
-        User.create({body})
+        User.create(body)
         .then (dbUserData => res.json(dbUserData))
         .catch (err => {
             console.log(err);
@@ -76,7 +76,7 @@ const userController = {
                 return;
             }
 
-            res.json(dbUserData);
+            console.log("User deleted!")
         })
         .catch (err => {
             console.log(err);
