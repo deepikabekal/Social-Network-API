@@ -79,6 +79,13 @@ const thoughtController = {
     //remove thought by id
     removeThought ({params}, res) {
         Thought.findByIdAndDelete(params.id)
+        .then(data => {
+            return User.findOneAndUpdate(
+                {username : data.username},
+                {$pull : {thoughts : params.id}},
+                {new : true}
+            )
+        })
         .then (dbThoughtData => {
             if (!dbThoughtData)
             {
