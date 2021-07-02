@@ -1,4 +1,4 @@
-const { User } = require ('../models');
+const { User, Thought } = require ('../models');
 
 const userController = {
     //get all users
@@ -51,6 +51,26 @@ const userController = {
     //update an existing user by id
     updateUser ({ body, params }, res) {
         User.findByIdAndUpdate(params.id, body, {new : true})
+        .then (data => {
+            if (data)
+            {
+                for (var i=0 ; i < data.thoughts.length; i++)
+                {
+                    Thought.findByIdAndUpdate(
+                        {id : data.thoughts[i]},
+                        {username : data.username[i]},
+                        {new : true}                
+                    )
+                }                
+                return true ;
+            }
+            else
+            {
+                return false;
+            }
+            
+           //console.log(data);
+        })
         .then (dbUserData => {
             if (!dbUserData)
             {
@@ -58,7 +78,8 @@ const userController = {
                 return;
             }
 
-            res.json(dbUserData);
+            console.log("User updated!");
+            res.status(200).json({message : "User has been updated!"});
         })
         .catch (err => {
             console.log(err);
@@ -76,7 +97,8 @@ const userController = {
                 return;
             }
 
-            console.log("User deleted!")
+            console.log("User deleted!");
+            res.status(200).json({message : "User has been deleted!"});
         })
         .catch (err => {
             console.log(err);

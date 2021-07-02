@@ -86,7 +86,7 @@ const thoughtController = {
                 return;
             }
 
-            res.json(dbThoughtData);
+            res.status(200).json({message : 'Thought has been deleted!'});
         })
         .catch(err => {
             console.log(err);
