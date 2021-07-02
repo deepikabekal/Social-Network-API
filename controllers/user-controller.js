@@ -52,22 +52,13 @@ const userController = {
     updateUser ({ body, params }, res) {
         User.findByIdAndUpdate(params.id, body, {new : true})
         .then (data => {
-            if (data)
-            {
-                for (var i=0 ; i < data.thoughts.length; i++)
-                {
-                    Thought.findByIdAndUpdate(
-                        {id : data.thoughts[i]},
-                        {username : data.username[i]},
-                        {new : true}                
-                    )
-                }                
-                return true ;
-            }
-            else
-            {
-                return false;
-            }
+            console.log(data.thoughts);
+            return Thought.updateMany(
+                {_id : {$in : data.thoughts}},
+                {$set : {username : body.username}},
+                {multi : true,
+                new : true}
+            )
             
            //console.log(data);
         })
