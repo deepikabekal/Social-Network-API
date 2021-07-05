@@ -82,12 +82,18 @@ const userController = {
     deleteUser ({params}, res) {
         User.findByIdAndDelete(params.id)
         .then(data => {
+            if (!data.thoughts)
+            {
+                return true;
+            }
+
             return Thought.deleteMany(
                 {_id : {$in : data.thoughts}},
-                {$pull : {_id : data.thoughts}},
+                // {$pull : {_id : data.thoughts}},
                 {multi : true,
                 new : true}
-            )
+            )  
+            
         })
         .then (dbUserData => {
             if (!dbUserData)
