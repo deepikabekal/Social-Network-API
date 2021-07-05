@@ -14,6 +14,7 @@ An API for a social network web application where users can share their thoughts
 
 ## Walkthrough Video
 https://drive.google.com/file/d/1VWLY19l4qo320iYkR2UpRLtjKHt5yqf-/view?usp=sharing
+<img src="public/assets/images/walkthrough.mp4" width=300 height=300>
 
 ## Installation
 1. Make sure you have MongoDB and Insomnia or Postman installed.
