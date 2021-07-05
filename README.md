@@ -13,7 +13,7 @@ An API for a social network web application where users can share their thoughts
 * [Contributing](#contributing)
 
 ## Walkthrough Video
-<img src="public/assets/walkthrough.gif" width=200 height = 200>
+<img src="public/assets/images/walkthrough.gif" width=200 height = 200>
 
 ## Installation
 1. Make sure you have MongoDB and Insomnia or Postman installed.
