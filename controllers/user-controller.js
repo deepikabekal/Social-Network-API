@@ -52,7 +52,7 @@ const userController = {
     updateUser ({ body, params }, res) {
         User.findByIdAndUpdate(params.id, body, {new : true})
         .then (data => {
-            console.log(data.thoughts);
+            
             return Thought.updateMany(
                 {_id : {$in : data.thoughts}},
                 {$set : {username : body.username}},
@@ -81,6 +81,14 @@ const userController = {
     //delete an existing user by id
     deleteUser ({params}, res) {
         User.findByIdAndDelete(params.id)
+        .then(data => {
+            return Thought.deleteMany(
+                {_id : {$in : data.thoughts}},
+                {$pull : {_id : data.thoughts}},
+                {multi : true,
+                new : true}
+            )
+        })
         .then (dbUserData => {
             if (!dbUserData)
             {
